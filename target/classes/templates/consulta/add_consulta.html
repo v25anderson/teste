@@ -1,0 +1,77 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous" defer></script>
+    <link rel="stylesheet" href="/css/styles_forms.css">
+    <title>Registrar consulta</title>
+</head>
+<body>
+    <div class="container col-11 col-md-9" id="form-container">
+        <div class="row gx-5">
+            <div class="col-md-6">
+                <h2>Solicitação de consulta</h2>
+                <form th:action="@{/consultas/salvar}" th:method="${consulta.id} == 0 ? post : put" th:object="${consulta}">
+                    <input id="id" type="hidden" th:field="*{id}"/>
+                    <div class="form-floating mb-3">
+                        <select class="form-select form-select-sm"
+                                aria-label="Small select example" id="paciente"
+                                name="paciente" placeholder="Selecione o paciente">
+                            <option value="idPaciente">Trazer todos os pacientes cadastrados</option>
+                        </select>
+                        <label for="especialidade" class="form-label">Selecione o paciente</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select form-select-sm"
+                                aria-label="Small select example" id="especialidade"
+                                name="especialidade" placeholder="Selecione a especialidade">
+                            <option value="CARDIOLOGISTA">Cardiologista</option>
+                            <option value="CLINICO_GERAL">Clínico Geral</option>
+                            <option value="DERMATOLOGISTA">Dermatologista</option>
+                            <option value="OTORRINOLARINGOLOGISTA">Otorrinolaringologista</option>
+                            <option value="PEDIATRA">Pediatra</option>
+                            <option value="PNEUMOLOGISTA">Pneumologista</option>
+                        </select>
+                        <label for="especialidade" class="form-label">Selecione a especialidade</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select form-select-sm"
+                                aria-label="Small select example" id="medico"
+                                name="medico" placeholder="Selecione o médico">
+                            <option value="CARDIOLOGISTA">Selecionar o médico da especialidade</option>
+                        </select>
+                        <label for="especialidade" class="form-label">Selecione o médico</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control" id="data_consulta" name="data_consulta"
+                               placeholder="Data da consulta (dd/mm/yyyy)"
+                               th:value="*{data_consulta}">
+                        <label for="data_consulta" class="form-label">Data/hora da consulta (dd/mm/yyyy)</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="submit" class="btn btn-primary" value="Salvar">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <img src="/img/consulta.avif" alt="Hello New Customer" class="img-fluid">
+                    </div>
+                    <div class="col-12" id="link-container">
+                        <a href="/consultas/listar">Voltar a lista de consultas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+        <footer class="footer">
+            <p>&copy; 2024 CLínica MCL</p>
+        </footer>
+    </div>
+</body>
+</html>

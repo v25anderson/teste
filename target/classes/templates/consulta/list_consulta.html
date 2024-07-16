@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous" defer></script>
+    <link href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/styles_forms.css">
+    <title>Listar Consultas</title>
+</head>
+<body>
+    <div class="container col-11 col-md-9">
+        <div class="jumbotron">
+            <h1>Clínica MCL</h1>
+        </div>
+        <hr/>
+    </div>
+    <div class="container col-11 col-md-9" id="form-container">
+        <div class="row align-items-center gx-5">
+            <div class="col-md-12 order-md-2">
+                <div th:if="${consultas != null}">
+                    <h2>Consultas</h2>
+                    <div th:if="${mensagem != null}">
+                        <div class="alert alert-info" role="alert">
+                            <span th:text="${mensagem}">mensagem</span>
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Especialidade</th>
+                            <th>Médico</th>
+                            <th>Consulta (data/hora)</th>
+                            <th>Ação</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="consulta : ${consultas}">
+                            <td th:text="${consulta.paciente.nome}">Nome do Paciente</td>
+                            <td th:text="${consulta.medico.especialidade}">especialidade</td>
+                            <td th:text="${consulta.medico.nome}">Nome do Médico</td>
+                            <td th:text="${consulta.data_consulta}">Consulta(data/hora)</td>
+                            <td>
+                                <a class="btn btn-sm btn-success" th:href="@{/consultas/atender}">Atendimento</a>
+                                <a class="btn btn-sm btn-info" th:href="@{/consultas/{id}/atualizar(id=${consulta.id})}">Editar</a>
+                                <a class="btn btn-sm btn-danger" th:href="@{/consultas/{id}/remover(id=${consulta.id})}">Excluir</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <a class="btn btn-primary" th:href="@{/consultas/cadastro}">Agendar Consulta</a>
+            </div>
+        </div>
+        <hr/>
+        <div class="col-12" id="link-container">
+            <a href="/home">Voltar a home</a>
+        </div>
+        <hr/>
+        <footer class="footer">
+            <p>&copy; 2024 CLínica MCL</p>
+        </footer>
+    </div>
+</body>
+</html>
